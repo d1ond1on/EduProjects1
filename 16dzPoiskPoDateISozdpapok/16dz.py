@@ -4,9 +4,8 @@ from tkinter import filedialog
 from tkinter import ttk
 import os
 from datetime import datetime
-# установка параметров главного окна - положение, имя и иконка окна
+# main window parametres
 root = Tk()
-# root.geometry('1000x400+800+300')
 root.title('D1 refract')
 root.iconbitmap('G:\Python\project\gameProject\\notepad\python.ico')
 #function for menu
@@ -22,11 +21,12 @@ def my_quite():
     if answer:
         root.quit()
 #function for main window
+#choose your destination for work8)
 def get_path():
     path = filedialog.askdirectory()
     entry.delete(0, END)
     entry.insert(0, path)
-
+# up all file to root(work) dir
 def up_file():
     cur_path = entry.get()
     if cur_path :
@@ -39,7 +39,7 @@ def up_file():
 
     else :
         messagebox.showwarning(message='Ykajite papky s photo')
-
+# sort files in root(work) dir and move  to they data dir
 def sort_file():
     cur_path = entry.get()
     if cur_path :
@@ -57,7 +57,7 @@ def sort_file():
 
     else :
         messagebox.showwarning(message='Ykajite papky s photo')
-
+# sort file by size, create dir 'to_large' for big files( more than entry2)
 def sort_fsize():
     cur_path = entry.get()
     to_large = entry2.get()
@@ -76,7 +76,7 @@ def sort_fsize():
     else :
         messagebox.showinfo(message='Укажите путь к папке и/или размер файла в Мб для сортировки  и перемещения в папку to-large')
 
-# Меню
+# Menu
 main_menu = Menu(root)
 root.config(menu=main_menu)
 
@@ -88,16 +88,16 @@ theme_menu = Menu(main_menu, tearoff=0)
 theme_menu.add_command(label='O programme', command= about_prog)
 main_menu.add_cascade(label='raznoe', menu=theme_menu)
 
-# Кнопки
+# Button for action
 
 button1 = Button(root, text='Указать путь к рабочей папке', command= get_path)
 button2 = Button(root, text='Вытащить все файлы из подпапок в корень', command= up_file)
 button3 = Button(root, text='сортировка по дате', command= sort_file)
 button4 = Button(root, text='сортировка по размеру', command= sort_fsize)
-button1.grid(row=0, column=0)
-button2.grid(row=1, column=0)
-button3.grid(row=2, column=0)
-button4.grid(row=3, column=0)
+button1.grid(row=0, column=0, sticky=W+E)
+button2.grid(row=1, column=0, sticky=W+E)
+button3.grid(row=2, column=0, sticky=W+E)
+button4.grid(row=3, column=0, sticky=W+E)
 entry = Entry(root)
 
 entry.grid(row=0,column=1)
