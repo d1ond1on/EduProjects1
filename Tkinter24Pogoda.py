@@ -6,10 +6,10 @@ from tkinter import messagebox
 import json
 import time
 
-
-API_KEY = '5d090b69c712657827d9b50a379a4742'
+#api instruments
+API_KEY = '5d090b69c712657827d9b50a379a4742' # free key, 60 requests per minute
 API_URL = 'http://api.openweathermap.org/data/2.5/weather'
-
+# data from apirequest(json format)
 def print_weather(weather):
     try:
 
@@ -32,12 +32,7 @@ def print_weather(weather):
     except:
         return 'Ошибка получени данных...'
 
-
-
-
-# r = requests.get('http://api.openweathermap.org/data/2.5/weather?q=Rostov-on-don,ru&APPID=5d090b69c712657827d9b50a379a4742&lang=ru')
-
-#token: http://api.openweathermap.org/data/2.5/weather?q=London,uk&APPID=5d090b69c712657827d9b50a379a4742&lang=ru
+#api request with api instruments
 def get_weather(event=''):
     if not entry.get():
         messagebox.showwarning('Warning','Введите запрос в формате city, country_code')
@@ -53,6 +48,7 @@ def get_weather(event=''):
         # print(weather)
         label['text'] = print_weather(weather)
 
+# main window< structure
 root = ThemedTk(theme='arc')
 root.geometry('500x400+1000+300')
 root.resizable(0, 0)
@@ -62,18 +58,19 @@ s.configure('TLabel', padding=5, font='Arial 11')
 
 top_frame = ttk.Frame(root)
 top_frame.place(relx=0.5, rely=0.1, relwidth=0.9,relheight=0.1, anchor='n')
-
+#default City, can rewrite, manual
 entry = ttk.Entry(top_frame)
 entry.insert(0,'Rostov-on-don',)
 entry.place(relwidth=0.7,relheight=1)
-
+# button, use to get data
 button = ttk.Button(top_frame, text='Запрос погоды', command=get_weather)
 button.place(relx=0.7,relwidth=0.3,relheight=1)
 
 low_frame = ttk.Frame(root)
 low_frame.place(relx=0.5, rely=0.25, relwidth=0.9,relheight=0.6, anchor='n')
-
+# field with result request
 label = ttk.Label(low_frame,  anchor="nw")
 label.place(relwidth=1, relheight=1)
+#expect to press Enter button for run request with data from entry field(city)
 entry.bind('<Return>',get_weather)
 root.mainloop()
